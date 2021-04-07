@@ -22,9 +22,6 @@ import theme from './theme'
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-    mainContainer: {
-    
-    }, 
     appBar: {
         borderTopLeftRadius: '10px',
         borderTopRightRadius: '10px'
@@ -35,11 +32,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: '#e5e5e5',
         height: '700px',
         
-    },    
-    navButton: {
-        color: 'white',
-        marginRight: '20px'
-    },
+    }
 }));
 
 const Main = () => {
