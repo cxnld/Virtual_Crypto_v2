@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
         width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor: 'red'
     },
     img: {
         borderRadius: '15px'

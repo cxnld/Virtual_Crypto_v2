@@ -1,8 +1,8 @@
-import { BrowserRouter as Router, Route, Switch, Link, Redirect } from 'react-router-dom';
-import Portfolio from '../Portfolio';
+import { BrowserRouter as Router, Route, Switch, Link, Redirect, useHistory } from 'react-router-dom';
+import { useEffect } from 'react'
+import Portfolio from './Portfolio/Portfolio';
 import Browse from './Browse/Browse';
-import CoinInfo from '../CoinInfo';
-import Dashboard from './Dashboard';
+import CoinInfo from './Browse/CoinInfo/CoinInfo';
 
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import 'fontsource-roboto'
@@ -16,7 +16,7 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import DashboardIcon from '@material-ui/icons/Dashboard';
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 const useStyles = makeStyles((theme) => createStyles({
@@ -49,8 +49,15 @@ const useStyles = makeStyles((theme) => createStyles({
     },
 }))
 
-const Main2 = () => {
+const Main = () => {
     const classes = useStyles()
+    const history = useHistory()
+    const jwt = sessionStorage.getItem("jwt")
+
+    useEffect(() => {
+        // If we don't find a JWT in sessionStorage, redirect to login page
+        if (!jwt) { history.push('/login') }
+    }, [])
 
     return (
         <Router>
@@ -60,7 +67,12 @@ const Main2 = () => {
                         <Typography variant="h6" noWrap className={classes.title}>
                             Virtual Crypto v2
                         </Typography>
-                        <Button color="inherit">Login</Button>
+                        {jwt?
+                            <Button color="inherit">Logout</Button>
+                            :
+                            <Button color="inherit">Login</Button>
+                        }
+                        
                     </Toolbar>
                 </AppBar>
 
@@ -68,11 +80,11 @@ const Main2 = () => {
                     <Toolbar />
                         <div className={classes.drawerContainer}>
                             <List>
-                                <ListItem button component={Link} to='/main2/portfolio'>
-                                    <ListItemIcon><DashboardIcon/></ListItemIcon>
-                                    <ListItemText primary="Dashboard" />
+                                <ListItem button component={Link} to='/main/portfolio'>
+                                    <ListItemIcon><MonetizationOnIcon/></ListItemIcon>
+                                    <ListItemText primary="Portfolio" />
                                 </ListItem>
-                                <ListItem button component={Link} to='/main2/browse'>
+                                <ListItem button component={Link} to='/main/browse'>
                                     <ListItemIcon><ShoppingCartIcon/></ListItemIcon>
                                     <ListItemText primary="Browse" />
                                 </ListItem>
@@ -84,11 +96,10 @@ const Main2 = () => {
 
                 <main className={classes.content}>
                         <Switch>
-                            <Redirect from="/main2" to="/main2/dashboard" exact /> 
-                            <Route path='/main2/dashboard' exact component={Dashboard}></Route>
-                            <Route path='/main2/portfolio' exact component={Portfolio}></Route>
-                            <Route path='/main2/browse' exact component={Browse}></Route>
-                            <Route path='/main2/browse/:id' exact component={CoinInfo}></Route>
+                            <Redirect from="/main" to="/main/portfolio" exact /> 
+                            <Route path='/main/portfolio' exact component={Portfolio}></Route>
+                            <Route path='/main/browse' exact component={Browse}></Route>
+                            <Route path='/main/browse/:id' exact component={CoinInfo}></Route>
                         </Switch>
                 </main>
             </div>
@@ -96,4 +107,4 @@ const Main2 = () => {
     )
 }
 
-export default Main2
+export default Main

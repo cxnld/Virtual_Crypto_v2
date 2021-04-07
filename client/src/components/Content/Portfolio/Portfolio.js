@@ -111,7 +111,8 @@ const Portfolio = () => {
                             borderWidth: 1.2
                             }]
                         }}
-                        width={500}
+                        width={100}
+                        height={300}
                         options={{ maintainAspectRatio: false, responsive: true, legend: false}}
                     />
                 </Container>

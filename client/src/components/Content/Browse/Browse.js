@@ -67,7 +67,7 @@ const Browse = () => {
 
     // on start and on page change, call api then setCoins, setCoins issues a render and the page updates with the correct coins
     useEffect(() => {
-        axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=11&page=${page}&sparkline=false`)
+        axios.get(`https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=12&page=${page}&sparkline=false`)
         .then((res) => {
             setCoins(res.data);
         })
