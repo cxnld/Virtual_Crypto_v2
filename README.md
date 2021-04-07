@@ -1,4 +1,4 @@
-# Virtual Crypto
+# Virtual Crypto v2
 
 #### A virtual cryptocurrency portfolio manager that uses real time prices. Practice investing in cryptocurrency before using real money!
 
